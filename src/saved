@@ -1,0 +1,70 @@
+<script>
+  export default {
+    data () {
+      return {
+          status:[],
+          scrollmad:'scroll',
+          loading:true 
+      };
+    },
+    methods: {
+      send() {
+        Email.send({
+            Host : "smtp.elasticemail.com",
+            Username : "ayanwoye74@gmail.com",
+            Password : "1dbcbdc1-7da3-48af-b281-2ac4f2c5356a",
+            To : 'kingstech222@gmail.com',
+            From : "ayanwoye74@gmail.com",
+            Subject : "This is the subject",
+            Body : "And this is the body"
+        }).then(
+          message => alert(message)
+        );
+        var templateParams = {
+          name: 'James',
+          notes: 'Check this out!'
+      };
+ 
+      emailjs.send('user_xitxPGmsoF2eZqOZwkSlE', 'YOUR_TEMPLATE_ID', templateParams)
+          .then(function(response) {
+            console.log('SUCCESS!', response.status, response.text);
+          }, function(error) {
+            console.log('FAILED...', error);
+          });
+      },
+      showAlert(){
+            this.$swal('Hello Vue world!!!');
+        },
+        showAlertConfirm(){
+            this.$swal({
+              title: 'Are you sure?',
+              text: "You won't be able to revert this!",
+              type: 'warning',
+              showCancelButton: true,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+              if (result.value) {
+                this.$swal(
+                  'Deleted!',
+                  'Your file has been deleted.',
+                  'success'
+                )
+              }
+            });
+        }
+    }
+  }
+</script>
+
+
+   <script type="text/javascript" src="https://cdn.emailjs.com/sdk/2.3.2/email.min.js"></script>
+    <script type="text/javascript">
+      (function(){
+        emailjs.init("user_xitxPGmsoF2eZqOZwkSlE");
+        console.log('mounted!!!');
+    })();
+</script>
+
+    <script src="https://smtpjs.com/v3/smtp.js">
